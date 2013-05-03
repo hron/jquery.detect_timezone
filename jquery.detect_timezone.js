@@ -9,25 +9,25 @@
 (function( $ ){
 
   $.fn.set_timezone = function(options) {
-    
-      this.val(this.get_timezone(options));      
+
+      this.val(this.get_timezone(options));
       return this;
   };
-  
+
   $.fn.get_timezone = function(options) {
-    
+
     var settings = {
       'debug' : false,
       'default' : 'America/New_York'
     };
-    
+
     if(options) {
       $.extend( settings, options );
     }
-    
-    var tz_info = jstz.determine_timezone();
+
+    var tz_info = jstz.determine();
     var timezone = tz_info.timezone;
-    if (timezone != 'undefined') {
+    if (timezone !== undefined) {
       timezone.ambiguity_check();
       return timezone.olson_tz;
     } else {
@@ -37,5 +37,5 @@
       return settings['default']
     }
   };
-  
+
 })( jQuery );
